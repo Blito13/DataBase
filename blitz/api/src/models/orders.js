@@ -52,6 +52,11 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         // allowNull: false,
       },
+      totalprice: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        validate: { min: 0 },
+      },
     },
     { timestamps: false }
   );

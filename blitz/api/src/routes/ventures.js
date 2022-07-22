@@ -1,4 +1,4 @@
-require('dotenv').config();
+/* require('dotenv').config();
 const {Router} = require('express')
 const { Diet } = require('../db');
 const axios = require ('axios');
@@ -27,4 +27,4 @@ router.get('/', async (req, res) => {
 
 
 
-module.exports = router;
+module.exports = rout *//* er; */

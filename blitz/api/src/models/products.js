@@ -8,15 +8,11 @@ module.exports = (sequelize) => {
                 type: DataTypes.STRING,
                 allowNull: true,
                     },
-            price : {
+            price : {     
                 type: DataTypes.INTEGER,
                 allowNull: false,
-                    },
-            id:{
-                type: DataTypes.UUID,
-                defaultValue: DataTypes.UUIDV4,
-                primaryKey :true
-                },
+                    }, 
+            
         
         }
     )
