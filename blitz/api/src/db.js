@@ -6,7 +6,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/redfem`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -30,16 +30,19 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { customers , Orders , ventures , Products } = sequelize.models;
+const { Customers , Orders  } = sequelize.models;
 
 
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-Products.belongsToMany(Orders , {through : "pro-order"})
-Orders.belongsToMany(Products , {through : "pro-order"})
-/* ventures.belongsToMany(orders , {through : "venture-order"})
-orders.belongsToMany(ventures , {through : "venture-order"}) */
+/* Customers.belongsToMany(Orders , {through : "pro-order"})
+Orders.belongsToMany(Customers , {through : "pro-order"}) */
+
+/* Ventures.belongsToMany(Orders , {through : "venture-order"})
+Orders.belongsToMany(Ventures , {through : "venture-order"}) */
+/* Orders.belongsToMany (Customers,{through:"orders-customers"})
+Customers.belongsToMany (Orders,{through:"orders-customers"}) */
 
 
 module.exports = {

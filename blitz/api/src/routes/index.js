@@ -13,17 +13,17 @@ MiddleWares */
 router.use('/diets' , dietsRoute); */
 
 const customers = require('./customers');
-/* const orders = require('./orders');
-const ventures = require('./ventures');
-const products = require('./products');
- */
+const orders = require('./orders');
+//const ventures = require('./ventures');
+//const products = require('./products');
+
 // Configurar los routers
 
 router.use('/customers', customers)
-/* router.use('/orders', orders)
-router.use('/ventures', ventures)
-router.use('/products', products)
- */
+router.use('/orders', orders)
+//router.use('/ventures', ventures)
+//router.use('/products', products)
+
 
 
 
