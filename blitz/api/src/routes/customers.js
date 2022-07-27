@@ -1,8 +1,14 @@
 const {Customers } = require("../db");
 const customers = require("../mok/customers");
 const { Router } = require("express");
-
+const excelToJson = require('convert-excel-to-json');
+const order = require('C:\\Users\\Cerrajeria\\Desktop\\IMG\\blitz\\api\\src\\mok\\orders.json')
+console.log(order)
 const router = Router();
+const fs = require('fs');
+/* const vill = require('../utils') */
+const XLSX = require("xlsx");
+const { json, raw } = require("body-parser");
 /* id: "google-oauth2|112420871468081807642",
 fullName: "Ariel Ventura",
 billingAddress: "CL XX XX XX",
@@ -10,6 +16,7 @@ defaultShippingAddress: "CL XX XX XX",
 country: "ARG",
 phone: "888888888",
 userType: "user", */
+
 
 const getCust = async () =>{
   const newdata = []
@@ -41,12 +48,33 @@ const getCust = async () =>{
     } else {
      return(customers);
     }
-
-  
 }
+const BlinBlin = () => {
+  const exel = XLSX.readFile("C:\\Users\\Cerrajeria\\Desktop\\IMG\\blitz\\api\\src\\utils\\sss.xlsx"  )
+  const pageNum =  exel.SheetNames; //nombre de hojas que compone nuestro exel
+  var liviu = 'feCHA'
+  let data  = XLSX.utils.sheet_add_aoa(exel.Sheets[pageNum[0]] ,[[liviu]],{ origin: "A1", }) ;
+  let datE  = XLSX.utils.sheet_to_csv(exel.Sheets[pageNum[0]] ,/* [[liviu]],{ origin: "EJ30" } */) ;
+    
+
+/* console.log(Object.assign(data)) */
+/* console.log(oveja) */
+/* const vels = data.map(e => {
+
+}) */
+/* const vels =  Object.entries(data)  */
+   console.log(datE)
+  
+
+    }
+  
+
+
+
+
 
 router.get ('/' , async ( req , res)=>{
-  const values = await getCust()
+  const values = await BlinBlin()
   ;
  /*  console.log(values) */
   res.send(values)

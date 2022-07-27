@@ -33,7 +33,6 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Customers , Orders  } = sequelize.models;
 
 
-
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 /* Customers.belongsToMany(Orders , {through : "pro-order"})
