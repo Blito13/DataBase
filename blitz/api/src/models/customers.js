@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
       // },
       id: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
         primaryKey: true,
       },
       fullName: {

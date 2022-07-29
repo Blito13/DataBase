@@ -6,6 +6,11 @@ module.exports = (sequelize) => {
   sequelize.define(
     "orders",
     {
+      id: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        primaryKey: true,
+      },
       orderDate: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -46,7 +51,7 @@ module.exports = (sequelize) => {
       },
       quantity: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       productUrl: {
         type: DataTypes.TEXT,

@@ -14,6 +14,11 @@ module.exports = (sequelize) => {
   sequelize.define(
     "ventures",
     {
+      id: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        primaryKey: true,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,

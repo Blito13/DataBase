@@ -9,6 +9,7 @@ const fs = require('fs');
 /* const vill = require('../utils') */
 const XLSX = require("xlsx");
 const { json, raw } = require("body-parser");
+const { brotliCompress } = require("zlib");
 /* id: "google-oauth2|112420871468081807642",
 fullName: "Ariel Ventura",
 billingAddress: "CL XX XX XX",
@@ -49,21 +50,40 @@ const getCust = async () =>{
      return(customers);
     }
 }
+//https://www.npmjs.com/package/xlsx#common-spreadsheet-format ---XLSX DOCS.
 const BlinBlin = () => {
-  const exel = XLSX.readFile("C:\\Users\\Cerrajeria\\Desktop\\IMG\\blitz\\api\\src\\utils\\sss.xlsx"  )
+  const exel = XLSX.readFile("C:\\Users\\Cerrajeria\\Desktop\\IMG\\blitz\\api\\src\\utils\\sss.xlsx" ,  )
   const pageNum =  exel.SheetNames; //nombre de hojas que compone nuestro exel
   var liviu = 'feCHA'
-  let data  = XLSX.utils.sheet_add_aoa(exel.Sheets[pageNum[0]] ,[[liviu]],{ origin: "A1", }) ;
-  let datE  = XLSX.utils.sheet_to_csv(exel.Sheets[pageNum[0]] ,/* [[liviu]],{ origin: "EJ30" } */) ;
-    
+  
 
+/*   let dati  = */ 
+/*   let dati  = */// XLSX.utils.sheet_add_aoa(exel.Sheets[pageNum[0]] ,[["Combo-AlmaT-AmasoC"]],{ origin: "C1", }) ;
+/*   let dati  = */// //XLSX.utils.sheet_add_aoa(exel.Sheets[pageNum[0]] ,[["Combo-AlmaT-AmasoC"]],{ origin: "C1", }) ;
+/*   let dati  = */// XLSX.utils.sheet_add_aoa(exel.Sheets[pageNum[0]] ,[["Combo-AlmaT-AmasoC"]],{ origin: "C1", }) ;
+  let data  = XLSX.utils.sheet_to_json(exel.Sheets[pageNum[0]] , {raw :false}) ;
+  var bort = []
+
+  data.map(e=>{
+
+const vill = {
+  fecha : e['Marca temporal'],
+  correo : e["Direccion de correo electronico"]
+
+}
+
+  })
+  console.log(bort)
+ /*  bart = [...new Set(bort)] 
+  console.log(bart)
+ */
 /* console.log(Object.assign(data)) */
 /* console.log(oveja) */
 /* const vels = data.map(e => {
 
 }) */
 /* const vels =  Object.entries(data)  */
-   console.log(datE)
+   
   
 
     }
