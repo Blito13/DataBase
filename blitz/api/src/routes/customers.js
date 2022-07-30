@@ -52,7 +52,7 @@ const getCust = async () =>{
 }
 //https://www.npmjs.com/package/xlsx#common-spreadsheet-format ---XLSX DOCS.
 const BlinBlin = () => {
-  const exel = XLSX.readFile("C:\\Users\\Cerrajeria\\Desktop\\IMG\\blitz\\api\\src\\utils\\sss.xlsx" ,  )
+  const exel = XLSX.readFile("C:\\Users\\Cerrajeria\\Desktop\\IMG\\blitz\\api\\src\\utils\\Feria 67 (respuestas).xlsx" ,  )
   const pageNum =  exel.SheetNames; //nombre de hojas que compone nuestro exel
   var liviu = 'feCHA'
   
@@ -62,21 +62,43 @@ const BlinBlin = () => {
 /*   let dati  = */// //XLSX.utils.sheet_add_aoa(exel.Sheets[pageNum[0]] ,[["Combo-AlmaT-AmasoC"]],{ origin: "C1", }) ;
 /*   let dati  = */// XLSX.utils.sheet_add_aoa(exel.Sheets[pageNum[0]] ,[["Combo-AlmaT-AmasoC"]],{ origin: "C1", }) ;
   let data  = XLSX.utils.sheet_to_json(exel.Sheets[pageNum[0]] , {raw :false}) ;
+  /* console.log(data) */
   var bort = []
+  const productorxs={
+   Aguaribay : [],
+   AlmaToba :[],
+   AmasoCriando:[],
+   DeLaGra:[],
+   MissAmapola:[],
+   NonnaChiquita:[],
+   SantaAntonia:[],
+   Trapi:[],
+   ZweetArtesanal:[],
+   Ananda:[],
+   Altoviaje:[],
+   BeGero:[],
+   Gourmex:[],
+}
+
 
   data.map(e=>{
-
+    for(let N in e){
+      bort.push(N)
+      
+      /* console.log(`${N} : ${e[N]}`) */
+     }
 const vill = {
-  fecha : e['Marca temporal'],
-  correo : e["Direccion de correo electronico"]
-
+  fecha: e['Marca temporal'],
+  correo : e["Direccion de correo electronico"],
+ 
 }
 
   })
-  console.log(bort)
- /*  bart = [...new Set(bort)] 
+  /* console.log(bort) */
+  bart = [...new Set(bort)] 
   console.log(bart)
- */
+  return bart
+
 /* console.log(Object.assign(data)) */
 /* console.log(oveja) */
 /* const vels = data.map(e => {
