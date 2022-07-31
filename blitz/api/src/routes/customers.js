@@ -2,7 +2,7 @@ const {Customers } = require("../db");
 const customers = require("../mok/customers");
 const { Router } = require("express");
 const excelToJson = require('convert-excel-to-json');
-const order = require('C:\\Users\\Cerrajeria\\Desktop\\IMG\\blitz\\api\\src\\mok\\orders.json')
+const order = require('C:\\Users\\Cerrajeria\\Desktop\\IMG\\DataBase\\blitz\\api\\src\\mok\\orders.json')
 console.log(order)
 const router = Router();
 const fs = require('fs');
