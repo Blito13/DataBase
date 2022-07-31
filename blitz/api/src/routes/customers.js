@@ -10,13 +10,8 @@ const fs = require('fs');
 const XLSX = require("xlsx");
 const { json, raw } = require("body-parser");
 const { brotliCompress } = require("zlib");
-/* id: "google-oauth2|112420871468081807642",
-fullName: "Ariel Ventura",
-billingAddress: "CL XX XX XX",
-defaultShippingAddress: "CL XX XX XX",
-country: "ARG",
-phone: "888888888",
-userType: "user", */
+
+
 
 
 const getCust = async () =>{
@@ -40,7 +35,7 @@ const getCust = async () =>{
     if (count === 0) {
       try {
         const newType = await Customers.bulkCreate(newdata);
-        console.log('Where are you Scooby Doo?')
+        console.log('losted')
         return(newType);
       } catch (error) {
         
@@ -51,10 +46,10 @@ const getCust = async () =>{
     }
 }
 //https://www.npmjs.com/package/xlsx#common-spreadsheet-format ---XLSX DOCS.
-const BlinBlin = () => {
+const dataProces = () => {
   const exel = XLSX.readFile("C:\\Users\\Cerrajeria\\Desktop\\IMG\\blitz\\api\\src\\utils\\Feria 67 (respuestas).xlsx" ,  )
   const pageNum =  exel.SheetNames; //nombre de hojas que compone nuestro exel
-  var liviu = 'feCHA'
+
   
 
 /*   let dati  = */ 
@@ -63,7 +58,7 @@ const BlinBlin = () => {
 /*   let dati  = */// XLSX.utils.sheet_add_aoa(exel.Sheets[pageNum[0]] ,[["Combo-AlmaT-AmasoC"]],{ origin: "C1", }) ;
   let data  = XLSX.utils.sheet_to_json(exel.Sheets[pageNum[0]] , {raw :false}) ;
   /* console.log(data) */
-  var bort = []
+  var ventures = []
   const productorxs={
    Aguaribay : [],
    AlmaToba :[],
@@ -83,7 +78,7 @@ const BlinBlin = () => {
 
   data.map(e=>{
     for(let N in e){
-      bort.push(N)
+      ventures.push(N)
       
       /* console.log(`${N} : ${e[N]}`) */
      }
@@ -95,9 +90,9 @@ const vill = {
 
   })
   /* console.log(bort) */
-  bart = [...new Set(bort)] 
-  console.log(bart)
-  return bart
+  uniqueProducts= [...new Set(ventures)] 
+  console.log(uniqueProducts)
+  return uniqueProducts
 
 /* console.log(Object.assign(data)) */
 /* console.log(oveja) */
@@ -116,7 +111,7 @@ const vill = {
 
 
 router.get ('/' , async ( req , res)=>{
-  const values = await BlinBlin()
+  const values = await dataProces()
   ;
  /*  console.log(values) */
   res.send(values)
