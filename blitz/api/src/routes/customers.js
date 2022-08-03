@@ -47,7 +47,7 @@ const getCust = async () =>{
 }
 //https://www.npmjs.com/package/xlsx#common-spreadsheet-format ---XLSX DOCS.
 const dataProces = () => {
-  const exel = XLSX.readFile("C:\\Users\\Cerrajeria\\Desktop\\IMG\\blitz\\api\\src\\utils\\Feria 67 (respuestas).xlsx" ,  )
+  const exel = XLSX.readFile("C:\\Users\\Cerrajeria\\Desktop\\IMG\\DataBase\\blitz\\api\\src\\utils\\Feria 67 (respuestas).xlsx" ,  )
   const pageNum =  exel.SheetNames; //nombre de hojas que compone nuestro exel
 
   
@@ -74,25 +74,29 @@ const dataProces = () => {
    BeGero:[],
    Gourmex:[],
 }
-
+  const word= [];
+  var letter = ""
 
   data.map(e=>{
     for(let N in e){
-      ventures.push(N)
-      
+    
+     
       /* console.log(`${N} : ${e[N]}`) */
+     word.push(N)
+     
      }
+     
 const vill = {
   fecha: e['Marca temporal'],
   correo : e["Direccion de correo electronico"],
  
 }
-
+/* console.log(word) */
   })
   /* console.log(bort) */
-  uniqueProducts= [...new Set(ventures)] 
-  console.log(uniqueProducts)
-  return uniqueProducts
+  uniqueProducts= [...new Set(word)] 
+  /* console.log(uniqueProducts) */
+  return console.log(uniqueProducts.length)
 
 /* console.log(Object.assign(data)) */
 /* console.log(oveja) */
