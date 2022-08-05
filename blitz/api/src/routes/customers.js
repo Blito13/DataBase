@@ -17,6 +17,13 @@ const pipeline = promisify(require("stream").pipeline)
 /* var multer = require('multer')({
   dest: '../public/uploads'
 }) */
+const getExel = async ()=>{
+
+  const exel =   await XLSX.readFile("C:\\Users\\Cerrajeria\\Desktop\\IMG\\DataBase\\blitz\\api\\public\\files\\sample-file.xlsx",  )
+  const pageNum =   await exel.SheetNames; //nombre de hojas que compone nuestro exel
+  let data  =   await XLSX.utils.sheet_to_json(exel.Sheets[pageNum[0]] , {raw :false}) ;
+console.log(data)  
+}
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/files');
@@ -33,7 +40,8 @@ const storage = multer.diskStorage({
       return res.status(500).json(err);
     } else if (err) {
       return res.status(500).json(err);
-    }
+    } 
+    getExel()
     return res.status(200).send(req.file);
   });
  });
@@ -71,10 +79,6 @@ console.log((exelPath)) */
     
   } */
  /*  res.send(exelPath) */
-  const exel =   XLSX.readFile("C:\\Users\\Cerrajeria\\Desktop\\IMG\\DataBase\\blitz\\api\\public\\files\\sample-file.xlsx",  )
-  const pageNum =   exel.SheetNames; //nombre de hojas que compone nuestro exel
-  let data  =   XLSX.utils.sheet_to_json(exel.Sheets[pageNum[0]] , {raw :false}) ;
-  console.log(data)
 
 /* }) */
 
