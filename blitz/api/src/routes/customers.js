@@ -3,150 +3,79 @@ const customers = require("../mok/customers");
 const { Router } = require("express");
 const excelToJson = require('convert-excel-to-json');
 const order = require('C:\\Users\\Cerrajeria\\Desktop\\IMG\\DataBase\\blitz\\api\\src\\mok\\orders.json')
-console.log(order)
+/* console.log(order) */
 const router = Router();
-const fs = require('fs');
+
 /* const vill = require('../utils') */
 const XLSX = require("xlsx");
-const { json, raw } = require("body-parser");
-const { brotliCompress } = require("zlib");
-
-
-
-
-const getCust = async () =>{
-  const newdata = []
-  const customInfo =  await customers.map((e)=> {
-    const customCreate =  {
-      id :e.id,
-      fullName : e.fullName,
-      billingAddress : e.billingAddress,
-      phone : e.phone,
-      defaultShippingAddress : e.defaultShippingAddress,
-      country : e.country,
-      userType : e.userType     //nullviolations
-
-    }
-    newdata.push(customCreate) 
-  })
-
-    const count = await Customers.count();
-    console.log(count , 'dax')
-    if (count === 0) {
-      try {
-        const newType = await Customers.bulkCreate(newdata);
-        console.log('losted')
-        return(newType);
-      } catch (error) {
-        
-        console.log(error , "bill");
-      }
-    } else {
-     return(customers);
-    }
-}
+const multer = require ("multer")
+const fs = require("fs");
+const { promisify } = require("util");
+const pipeline = promisify(require("stream").pipeline) 
+/* const parseFile = require('./helpers'); */
 //https://www.npmjs.com/package/xlsx#common-spreadsheet-format ---XLSX DOCS.
-const dataProces = () => {
-  const exel = XLSX.readFile("C:\\Users\\Cerrajeria\\Desktop\\IMG\\DataBase\\blitz\\api\\src\\utils\\Feria 67 (respuestas).xlsx" ,  )
-  const pageNum =  exel.SheetNames; //nombre de hojas que compone nuestro exel
-
-  
-
-/*   let dati  = */ 
-/*   let dati  = */// XLSX.utils.sheet_add_aoa(exel.Sheets[pageNum[0]] ,[["Combo-AlmaT-AmasoC"]],{ origin: "C1", }) ;
-/*   let dati  = */// //XLSX.utils.sheet_add_aoa(exel.Sheets[pageNum[0]] ,[["Combo-AlmaT-AmasoC"]],{ origin: "C1", }) ;
-/*   let dati  = */// XLSX.utils.sheet_add_aoa(exel.Sheets[pageNum[0]] ,[["Combo-AlmaT-AmasoC"]],{ origin: "C1", }) ;
-  let data  = XLSX.utils.sheet_to_json(exel.Sheets[pageNum[0]] , {raw :false}) ;
-  /* console.log(data) */
-  var ventures = []
-  const productorxs={
-   Aguaribay : [],
-   AlmaToba :[],
-   AmasoCriando:[],
-   DeLaGra:[],
-   MissAmapola:[],
-   NonnaChiquita:[],
-   SantaAntonia:[],
-   Trapi:[],
-   ZweetArtesanal:[],
-   Ananda:[],
-   Altoviaje:[],
-   BeGero:[],
-   Gourmex:[],
-}
-  const word= [];
-  var letter = ""
-
-  data.map(e=>{
-    for(let N in e){
-    
-     
-      /* console.log(`${N} : ${e[N]}`) */
-     word.push(N)
-     
-     }
-     
-const vill = {
-  fecha: e['Marca temporal'],
-  correo : e["Direccion de correo electronico"],
- 
-}
-/* console.log(word) */
-  })
-  /* console.log(bort) */
-  uniqueProducts= [...new Set(word)] 
-  /* console.log(uniqueProducts) */
-  return console.log(uniqueProducts.length)
-
-/* console.log(Object.assign(data)) */
-/* console.log(oveja) */
-/* const vels = data.map(e => {
-
+/* var multer = require('multer')({
+  dest: '../public/uploads'
 }) */
-/* const vels =  Object.entries(data)  */
-   
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/files');
+  },
+  filename: function (req, file, cb) {
+    cb(null, 'sample-file.xlsx');
+  },
+ });
   
-
+ const upload = multer({ storage: storage }).single('file');
+ router.post('/', async (req, res) => {
+  await upload(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+      return res.status(500).json(err);
+    } else if (err) {
+      return res.status(500).json(err);
     }
+    return res.status(200).send(req.file);
+  });
+ });
+ 
+/* router.post('/', upload.single("file") , function (req, res, next) {
+  const {file,
+  body :{name}} = req; */
+    
+  // req.file es el `avatar` del archivo
+  // req.body tendrá los campos textuales, en caso de haber alguno.
+
+/* var upload = multer({ storage: storage }).single('file')
+router.post('/customers',function(req, res) {
+     const {file } = req.body
+     console.log(file)
+  upload(req, res, function (err) {
+         if (err instanceof multer.MulterError) {
+             return res.status(500).json(err)
+         } else if (err) {
+             return res.status(500).json(err)
+         }
+    return res.status(200).send(req.file)
+
+  })
+
+}); */
+
+/* router.get ('/' , function ( req , res){
+
   
+const exelPath = req.body;
+console.log((exelPath)) */
+  /* for (c in exelPath){
+    letter = c
+    
+  } */
+ /*  res.send(exelPath) */
+  const exel =   XLSX.readFile("C:\\Users\\Cerrajeria\\Desktop\\IMG\\DataBase\\blitz\\api\\public\\files\\sample-file.xlsx",  )
+  const pageNum =   exel.SheetNames; //nombre de hojas que compone nuestro exel
+  let data  =   XLSX.utils.sheet_to_json(exel.Sheets[pageNum[0]] , {raw :false}) ;
+  console.log(data)
 
-
-
-
-
-router.get ('/' , async ( req , res)=>{
-  const values = await dataProces()
-  ;
- /*  console.log(values) */
-  res.send(values)
-})
+/* }) */
 
 module.exports = router 
- /* const users = [ 
-  {id: '1', fullName: 'User The First'},
-  {id: '2', fullName: 'User The Second'}
-];
-
-const getAll = () => Promise.resolve(users);
-const getById = (id) => Promise.resolve(users.find(u => u.id == id));
-
-module.exports = {
-  getById,
-  getAll
-};
-const handleResponse = (res, data) => res.status(200).send(data);
-const handleError = (res, err) => res.status(500).send(err);
-
-
-// routes/users.js
-router.get('/', function(req, res) {
-  userService.getAll()
-    .then(data => handleResponse(res, data))
-    .catch(err => handleError(res, err));
-});
- 
-router.get('/:id', function(req, res) {
-  userService.getById(req.params.id)
-    .then(data => handleResponse(res, data))
-    .catch(err => handleError(res, err));
-}); */
