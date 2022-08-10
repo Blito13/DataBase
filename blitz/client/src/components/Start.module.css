@@ -1,21 +1,29 @@
-input {
+.background {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  font-size: 1.5rem;
+  justify-content: center;
+}
+.input {
     font-size: 16px;
     padding: 5px;
     margin: 10px;
   }
-  
-  label {
+  .label {
     font-size: 18px;
     width: 100px;
-    text-align: left;
+    text-align: center;
   }
   
   .flex {
+    background-color: aliceblue;
     display: flex;
     align-items: center;
   }
   
-  button {
+  .button {
+   
     padding: 5px;
     width: 100px;
     border-radius: 2px;

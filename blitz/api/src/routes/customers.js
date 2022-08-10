@@ -3,26 +3,22 @@ const customers = require("../mok/customers");
 const { Router } = require("express");
 const excelToJson = require('convert-excel-to-json');
 const order = require('C:\\Users\\Cerrajeria\\Desktop\\IMG\\DataBase\\blitz\\api\\src\\mok\\orders.json')
-/* console.log(order) */
-const router = Router();
 
-/* const vill = require('../utils') */
+const router = Router();
 const XLSX = require("xlsx");
 const multer = require ("multer")
 const fs = require("fs");
 const { promisify } = require("util");
 const pipeline = promisify(require("stream").pipeline) 
-/* const parseFile = require('./helpers'); */
+
 //https://www.npmjs.com/package/xlsx#common-spreadsheet-format ---XLSX DOCS.
-/* var multer = require('multer')({
-  dest: '../public/uploads'
-}) */
-const getExel = async ()=>{
+
+const getExel = async  ( req ,res )=>{
 
   const exel =   await XLSX.readFile("C:\\Users\\Cerrajeria\\Desktop\\IMG\\DataBase\\blitz\\api\\public\\files\\sample-file.xlsx",  )
   const pageNum =   await exel.SheetNames; //nombre de hojas que compone nuestro exel
   let data  =   await XLSX.utils.sheet_to_json(exel.Sheets[pageNum[0]] , {raw :false}) ;
-console.log(data)  
+res.send(data)
 }
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -34,52 +30,20 @@ const storage = multer.diskStorage({
  });
   
  const upload = multer({ storage: storage }).single('file');
- router.post('/', async (req, res) => {
+ const postFile = async (req, res) => {
   await upload(req, res, function (err) {
     if (err instanceof multer.MulterError) {
       return res.status(500).json(err);
     } else if (err) {
       return res.status(500).json(err);
     } 
-    getExel()
+    
+    
     return res.status(200).send(req.file);
   });
- });
+ };
  
-/* router.post('/', upload.single("file") , function (req, res, next) {
-  const {file,
-  body :{name}} = req; */
-    
-  // req.file es el `avatar` del archivo
-  // req.body tendrá los campos textuales, en caso de haber alguno.
-
-/* var upload = multer({ storage: storage }).single('file')
-router.post('/customers',function(req, res) {
-     const {file } = req.body
-     console.log(file)
-  upload(req, res, function (err) {
-         if (err instanceof multer.MulterError) {
-             return res.status(500).json(err)
-         } else if (err) {
-             return res.status(500).json(err)
-         }
-    return res.status(200).send(req.file)
-
-  })
-
-}); */
-
-/* router.get ('/' , function ( req , res){
-
-  
-const exelPath = req.body;
-console.log((exelPath)) */
-  /* for (c in exelPath){
-    letter = c
-    
-  } */
- /*  res.send(exelPath) */
-
-/* }) */
-
+ 
+router.get("/", getExel);
+router.post("/", postFile);
 module.exports = router 
