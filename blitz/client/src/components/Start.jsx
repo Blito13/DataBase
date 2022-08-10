@@ -2,10 +2,13 @@
 import React, { useState , } from "react";
 import {useSelector, useDispatch} from 'react-redux'
 import styles from "./Start.module.css";
-import { postPath } from "../actions/actions";
+import { postPath ,getCustomers } from "../actions/actions";
 import Axios from "axios";
 
 function Start() {
+  
+  const sells = useSelector(state => state.sells)
+  console.log(sells)
   const [name, setName] = useState();
   const [file, setFile] = useState();
   const dispatch = useDispatch();
@@ -15,33 +18,17 @@ function Start() {
     setFile(file)
     console.log(file)
   }
-
-  const send = event => {
+  const getData = () => {
+    dispatch(getCustomers())
+  }
+  const send = () => {
     dispatch(postPath(file))
-   /*  const data = new FormData();
-    data.append("name", name);
-    data.append("file", file);
-    console.log(data)
-    Axios.post("http://localhost:3001/customers", data)
-      .then(res => console.log(res))
-      .catch(err => console.log(err)); */
   };
 
   return (
-    <div className={styles.background}>
-      <header className={styles.background}>
-        <form className={styles.background} >
-          {/* <div className={styles.flex}>
-            <label >Name</label>
-            <input className={styles.background}
-              type="text"
-              id="name"
-              onChange={event => {
-                const { value } = event.target;
-                setName(value);
-              }}
-            />
-          </div> */}
+    <div className={styles}>
+      <header className={styles}>
+        <form className={styles} >
           <div className={styles.input}>
             <label htmlFor="file">File</label>
             <input className={styles.input}
@@ -49,14 +36,26 @@ function Start() {
               id="file"
               accept=".xlsx"
               onChange={e => set(e)}
-              /* onChange={event => {
-                const file = event.target.files[0];
-                setFile(file);
-              }} */
             />
           </div>
         </form>
         <button className={styles.button} onClick={send}>Send</button>
+        <button className={styles.button} onClick={getData}>getData</button>
+      <div>
+
+        <h1>list</h1>
+       {sells? sells.map((e , i ) => 
+        <div key = {i}>
+
+      
+       <div>{e[i]}</div>
+                       
+        </div>
+) : 
+
+<label>Nothing ":O"</label>  }
+
+      </div>
       </header>
     </div>
   );

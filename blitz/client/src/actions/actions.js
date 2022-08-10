@@ -1,5 +1,5 @@
 import axios from "axios";
-
+export const GET_SELLS = "GET_SELLS"
 
 export  function postPath  (payload) {
     return async  function(dispatch){
@@ -14,11 +14,13 @@ export  function postPath  (payload) {
         } catch(error) { console.log(error)}
     }
 }
-/* const data = new FormData();
-    data.append("name", name);
-    data.append("file", file);
-    console.log(data)
-    Axios.post("http://localhost:3001/customers", data)
-      .then(res => console.log(res))
-      .catch(err => console.log(err)); */
-  
+export function getCustomers(payload) {
+    return async function (dispatch) {
+      var json = await axios.get("http://localhost:3001/customers");
+      console.log(json.data)
+      return dispatch({
+        type: "GET_SELLS",
+        payload: json.data,
+      });
+    };
+  }
