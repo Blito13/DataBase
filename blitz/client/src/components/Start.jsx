@@ -2,7 +2,7 @@
 import React, { useState , } from "react";
 import {useSelector, useDispatch} from 'react-redux'
 import styles from "./Start.module.css";
-import { postPath ,getCustomers } from "../actions/actions";
+import { postPath ,getCustomers  ,filterSells } from "../actions/actions";
 import Axios from "axios";
 
 function Start() {
@@ -13,16 +13,26 @@ function Start() {
   const [file, setFile] = useState();
   const dispatch = useDispatch();
   const set = (e) => {
-    e.preventDefault(e);
-    const file = e.target.files[0];
-    setFile(file)
-    console.log(file)
+    e.preventDefault();
+    const {name , value  , files} = e.target
+    if(name === 'file'){
+      const file = files[0];
+      setFile(file)
+      console.log(file)
+      dispatch(postPath(file))
+    }
+    if(name === 'search'){
+      setName(value)
+      console.log(value)
+      /*   */
+    }
   }
   const getData = () => {
     dispatch(getCustomers())
+    
   }
   const send = () => {
-    dispatch(postPath(file))
+    dispatch(filterSells(name))
   };
 
   return (
@@ -34,23 +44,33 @@ function Start() {
             <input className={styles.input}
               type="file"
               id="file"
+              name = "file"
               accept=".xlsx"
               onChange={e => set(e)}
             />
           </div>
         </form>
-        <button className={styles.button} onClick={send}>Send</button>
+        
         <button className={styles.button} onClick={getData}>getData</button>
+        <input name = 'search' onChange={e => set (e)} ></input>
+        <button className={styles.button}onClick={send} >search</button>
       <div>
 
         <h1>list</h1>
-       {sells? sells.map((e , i ) => 
-        <div key = {i}>
+       {sells? sells.map((e ,i )=> 
+       
 
       
-       <div>{e[i]}</div>
-                       
-        </div>
+       <li key = {i}> <form>
+        
+         <div>{e}</div>
+       </form>
+
+
+         
+         
+        </li>          
+      
 ) : 
 
 <label>Nothing ":O"</label>  }

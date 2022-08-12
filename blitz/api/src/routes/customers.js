@@ -18,8 +18,8 @@ const getExel = async  ( req ,res )=>{
   const exel =   await XLSX.readFile("C:\\Users\\Cerrajeria\\Desktop\\IMG\\DataBase\\blitz\\api\\public\\files\\sample-file.xlsx",  )
   const pageNum =   await exel.SheetNames; //nombre de hojas que compone nuestro exel
   let data  =   await XLSX.utils.sheet_to_json(exel.Sheets[pageNum[0]] , {raw :false}) ;
-
-res.json(data)
+let els = JSON.stringify(data)
+res.send(els)
 }
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
