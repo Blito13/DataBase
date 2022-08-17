@@ -8,6 +8,7 @@ import Axios from "axios";
 function Start() {
   
   const sells = useSelector(state => state.sells)
+  const filts = useSelector(state => state.obje)
   console.log(sells)
   const [name, setName] = useState();
   const [file, setFile] = useState();
@@ -58,24 +59,17 @@ function Start() {
 
         <h1>list</h1>
        {sells? sells.map((e ,i )=> 
-       
-
-      
-       <li key = {i}> <form>
-        
-         <div>{e}</div>
+      <div>
+       <form>
+         <span>{Object.entries(e)}</span>
+          <br></br>
        </form>
-
-
-         
-         
-        </li>          
-      
+      </div>    
 ) : 
-
 <label>Nothing ":O"</label>  }
 
       </div>
+      
       </header>
     </div>
   );

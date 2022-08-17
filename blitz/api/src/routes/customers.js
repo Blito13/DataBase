@@ -19,7 +19,10 @@ const getExel = async  ( req ,res )=>{
   const pageNum =   await exel.SheetNames; //nombre de hojas que compone nuestro exel
   let data  =   await XLSX.utils.sheet_to_json(exel.Sheets[pageNum[0]] , {raw :false}) ;
 let els = JSON.stringify(data)
-res.send(els)
+console.log(typeof els)
+let ens =  JSON.parse(els)
+console.log(typeof ens)
+res.send(ens)
 }
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
