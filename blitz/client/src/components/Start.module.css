@@ -1,9 +1,13 @@
 .background {
+  flex-direction: column;
+  justify-content: center;
   display: flex;
   flex-direction: column;
-  background-color: black;
+  background-color: beige;
   font-size: 1.5rem;
   justify-content: center;
+  align-self: center; 
+  align-items: center; 
 }
 .input {
     font-size: 16px;
@@ -15,16 +19,36 @@
     width: 100px;
     text-align: center;
   }
-  
   .flex {
     background-color: aliceblue;
-    display: flex;
+    display: center;
     align-items: center;
   }
+  .form{
+    background-color: transparent;
+    padding: 9px;
+    margin: auto;
+    border-radius: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;  
+}
   
   .button {
+    margin-block: 5px;
+    display: center;
+    padding: 2px;
+    width: 600px;
+    border-radius: 89px;
+    right : 450px;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .search {
+    margin-block: 5px;
+    display: center;
    
-    padding: 5px;
-    width: 100px;
-    border-radius: 2px;
+   /*  padding: 2px;
+    width: 600px;
+    border-radius: 89px;
+    right : 450px;
+    flex-direction: column; */
   }

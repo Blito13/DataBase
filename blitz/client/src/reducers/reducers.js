@@ -9,21 +9,20 @@ export default function rootReducer (state = initalState , {payload , type} ){
             const sell =  payload
         return {...state , sells :sell , obje : sell} 
         case FILTER_SELLS : 
-        const total =  state.sells
+        const total =  state.obje
         console.log(total)
         const paypay = payload.toLowerCase()
       
         const top =
         total.filter((e , i)=> { 
           for (let v in e ){
-            if (v.toLowerCase().includes(paypay) === true ) return e
-          }
-          
+            if (v.toLowerCase().includes(paypay) === true ) return e     }
+          //split
         })
-        return {...state , obje :top }
-       console.log(top)
+        console.log(top)
+        return {...state , sells :top }
             
-            /* La razón por la que no se puede hacer esto es que JSON es realmente una cadena. */
+           
      
             
                
